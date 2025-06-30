@@ -47,13 +47,22 @@ function normalizeTechName(name) {
   return map[name] || name;
 }
 
+// Utilidad para resolver la imagen usando import.meta.glob
+const images = import.meta.glob('../../assets/images/*', { eager: true });
+function getProjectImage(imgPath) {
+  const fileName = imgPath.split('/').pop();
+  const match = Object.entries(images).find(([key]) => key.endsWith(fileName));
+  return match ? match[1].default : '';
+}
+
 // Card de proyecto individual
 const ProjectCard = ({ project, onClick }) => (
   <div className={styles.card} onClick={onClick} tabIndex={0} role="button" aria-label={`Ver detalles de ${project.repo}`}
     onKeyDown={e => (e.key === "Enter" ? onClick() : null)}>
-    <img src={project.image} alt={project.repo} className={styles.image} loading="lazy" />
+    <img src={getProjectImage(project.img)} alt={project.repo} className={styles.image} loading="lazy" />
     <div className={styles.info}>
       <h3 className={styles.title}>{project.repo}</h3>
+      {/* <p className={styles.desc}>{project.desc}</p> */}
       <div className={styles.techList}>
         {project.tech.map((t) => {
           const norm = normalizeTechName(t);

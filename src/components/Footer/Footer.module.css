@@ -23,8 +23,40 @@
 .links a:hover {
   color: #005bb5;
 }
-.copy {
-  font-size: 0.97rem;
-  color: var(--color-text);
-  opacity: 0.7;
+
+.scrollTopBtn {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  border: none;
+  text-decoration: none;
+  margin-left: 2.5rem;
+  cursor: pointer;
+}
+.scrollTopBtn:hover {
+  background: #005bb5;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+[data-theme='dark'] .scrollTopBtn {
+  background: #fff;
+  color: #18191a;
+  border: 1px solid #fff;
+}
+[data-theme='dark'] .scrollTopBtn:hover {
+  background: #e0e0e0;
+  color: #18191a;
+}
+
+.footerRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 1rem;
 }

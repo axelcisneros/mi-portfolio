@@ -1,6 +1,14 @@
 import { useEffect, useRef } from "react";
 import styles from "./ProjectModal.module.css";
 
+// Resolver imágenes igual que en ProjectCard
+const images = import.meta.glob("../../assets/images/*", { eager: true });
+function getProjectImage(imgPath) {
+  const fileName = imgPath.split('/').pop();
+  const match = Object.entries(images).find(([key]) => key.endsWith(fileName));
+  return match ? match[1].default : '';
+}
+
 // Modal de detalles del proyecto
 const ProjectModal = ({ project, onClose }) => {
   const modalRef = useRef();
@@ -30,22 +38,17 @@ const ProjectModal = ({ project, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.modal} ref={modalRef}>
         <button className={styles.closeBtn} onClick={onClose} aria-label="Cerrar modal">×</button>
-        <img src={project.image} alt={project.repo} className={styles.image} />
-        <h2 className={styles.title}>{repo?.name || project.repo}</h2>
-        <p className={styles.desc}>{repo?.description || "Sin descripción."}</p>
-        <div className={styles.techList}>
-          {project.tech.map((t) => (
-            <span key={t} className={styles.tech}>{t}</span>
-          ))}
+        <img src={getProjectImage(project.img)} alt={project.repo} className={styles.image} />
+        <h2 className={styles.title}>{project.repo}</h2>
+        <p className={styles.desc}>{project.desc}</p>
+        <div className={styles.links}>
+          {project.web && (
+            <a href={project.web} target="_blank" rel="noopener noreferrer">Demo</a>
+          )}
+          {project.repoUrl && (
+            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+          )}
         </div>
-        {repo && (
-          <div className={styles.links}>
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">GitHub</a>
-            {repo.homepage && (
-              <a href={repo.homepage} target="_blank" rel="noopener noreferrer">Demo</a>
-            )}
-          </div>
-        )}
         {repo && (
           <div className={styles.repoStats}>
             <span>⭐ {repo.stargazers_count}</span>

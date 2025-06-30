@@ -11,37 +11,20 @@ import projectData from "./utils/projectData";
 import styles from "./styles/App.module.css";
 
 function Projects({ repos, openModal }) {
-  // Helper para buscar tecnologías personalizadas
-  const getTechForRepo = (repoName, defaultLang) => {
-    const found = projectData.find(p => p.repo.toLowerCase() === repoName.toLowerCase());
-    return found ? found.tech : [defaultLang || ""];
-  };
-
-  // Ordenar los repos según el índice definido en projectData (de mayor a menor)
-  const orderedRepos = [...repos].sort((a, b) => {
-    const aData = projectData.find(p => p.repo.toLowerCase() === a.name.toLowerCase());
-    const bData = projectData.find(p => p.repo.toLowerCase() === b.name.toLowerCase());
-    // Si ambos tienen índice, ordenar por índice descendente
-    if (aData && bData) return bData.index - aData.index;
-    // Si solo uno tiene índice, ese va primero
-    if (aData) return -1;
-    if (bData) return 1;
-    // Si ninguno, mantener el orden original
-    return 0;
-  });
+  // Ordenar y mapear los repos a los datos enriquecidos de projectData
+  const orderedProjects = projectData
+    .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
+    .sort((a, b) => b.index - a.index);
 
   return (
     <section className={styles.projectsSection} id="proyectos">
       <h2>Proyectos</h2>
       <div className={styles.projectsGrid}>
-        {orderedRepos.map((repo) => (
+        {orderedProjects.map((project) => (
           <ProjectCard
-            key={repo.id}
-            project={{
-              repo: repo.name,
-              tech: getTechForRepo(repo.name, repo.language)
-            }}
-            onClick={() => openModal(repo)}
+            key={project.repo}
+            project={project}
+            onClick={() => openModal(project)}
           />
         ))}
       </div>
@@ -86,8 +69,8 @@ function App() {
   }, []);
 
   // Abrir modal con el repo seleccionado
-  const openModal = (repo) => {
-    setSelectedProject(repo);
+  const openModal = (project) => {
+    setSelectedProject(project);
     setIsModalOpen(true);
   };
 

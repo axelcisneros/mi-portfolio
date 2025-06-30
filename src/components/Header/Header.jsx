@@ -26,8 +26,17 @@ const Header = () => {
         </p>
         <div className={styles.ctaBtns}>
           <a href={cvFile} className={styles.ctaBtn} target="_blank" rel="noopener noreferrer">CV</a>
-          <Link to="/projects" className={`${styles.ctaBtn} ${location.pathname === "/projects" ? styles.active : ""}`}>Proyectos</Link>
           <Link to="/about" className={`${styles.ctaBtn} ${location.pathname === "/about" ? styles.active : ""}`}>Sobre mí</Link>
+          <Link to="/projects" className={`${styles.ctaBtn} ${location.pathname === "/projects" ? styles.active : ""}`}>Proyectos</Link>
+          <button
+            className={styles.ctaBtn}
+            onClick={() => {
+              const footer = document.querySelector('footer');
+              if (footer) footer.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Contáctame
+          </button>
         </div>
       </div>
       <div className={styles.heroImgWrapper}>
