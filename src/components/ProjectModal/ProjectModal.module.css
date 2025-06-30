@@ -1,0 +1,101 @@
+/* Modal de proyecto */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--color-modal-bg); /* fondo translúcido */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal {
+  background: #fff; /* opaco en claro */
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 400px;
+  width: 90vw;
+  position: relative;
+  animation: modalIn 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+[data-theme='dark'] .modal {
+  background: #18191a; /* opaco en oscuro */
+}
+@keyframes modalIn {
+  from { transform: scale(0.95) translateY(30px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.closeBtn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+.image {
+  width: 100%;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.2rem 0;
+}
+.desc {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.tech {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.links {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.7rem;
+}
+.links a {
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: color var(--transition);
+}
+.links a:hover {
+  color: #005bb5;
+}

@@ -1,0 +1,117 @@
+/* Hero/Header principal */
+.header {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem 1.5rem 1rem;
+  background: var(--color-bg);
+  gap: 2rem;
+  min-height: 60vh;
+  transition: background var(--transition);
+}
+.heroContent {
+  text-align: center;
+  width: 100%;
+}
+.name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.title {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin: 0.5rem 0 1rem 0;
+}
+.phrase {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+.ctaBtns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+.ctaBtn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  border: none;
+  text-decoration: none;
+}
+.ctaBtn.active {
+  outline: 2px solid var(--color-accent);
+  background: var(--color-accent-dark);
+  color: #fff;
+}
+[data-theme='dark'] .ctaBtn.active {
+  outline: 2px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #18191a;
+}
+.ctaBtn:hover {
+  background: #005bb5;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+[data-theme='dark'] .ctaBtn {
+  background: #fff;
+  color: #18191a;
+  border: 1px solid #fff;
+}
+[data-theme='dark'] .ctaBtn:hover {
+  background: #e0e0e0;
+  color: #18191a;
+}
+.image, .heroImg {
+  background: #fff;
+  color: #18191a;
+}
+[data-theme='dark'] .image, [data-theme='dark'] .heroImg {
+  background: #18191a;
+  color: #fff;
+}
+.heroImgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heroImg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  background: #fff;
+  color: #18191a; /* color del alt text en claro */
+}
+[data-theme='dark'] .heroImg {
+  background: #18191a;
+  color: #fff; /* color del alt text en oscuro */
+}
+@media (min-width: 600px) {
+  .header {
+    flex-direction: row;
+    min-height: 50vh;
+    gap: 3rem;
+  }
+  .heroContent {
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: auto;
+  }
+  .ctaBtns {
+    justify-content: flex-start;
+  }
+}

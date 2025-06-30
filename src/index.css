@@ -1,0 +1,32 @@
+@import url(../src/styles/Variables.css);
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: calc(100vh - 64px);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+button {
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: var(--color-text-light);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+button:hover {
+  border-color: var(--color-accent);
+}

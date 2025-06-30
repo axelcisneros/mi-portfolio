@@ -1,0 +1,72 @@
+/* Card de proyecto */
+.card {
+  background: #111; /* negro en claro */
+  color: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition), background var(--transition);
+  border: 1px solid var(--color-border);
+  outline: none;
+}
+[data-theme='dark'] .card {
+  background: #fff; /* blanco en oscuro */
+  color: #111;
+}
+.card:hover, .card:focus {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  transform: translateY(-4px) scale(1.03);
+  background: var(--color-secondary);
+}
+.image, .heroImg, .aboutImg, .footerImg {
+  color: #18191a !important;
+}
+[data-theme='dark'] .image, [data-theme='dark'] .heroImg, [data-theme='dark'] .aboutImg, [data-theme='dark'] .footerImg {
+  color: #18191a !important;
+}
+.image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #eee;
+}
+.info {
+  padding: 1.1rem 1rem 1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem 0;
+}
+.desc {
+  font-size: 0.97rem;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+}
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tech {
+  background: rgba(245, 245, 235, 0.92); /* color hueso translúcido en tema claro */
+  color: var(--color-primary);
+  border-radius: 1rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+[data-theme='dark'] .tech {
+  background: rgba(40, 40, 45, 0.92); /* gris oscuro translúcido en tema oscuro */
+  color: var(--color-primary);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
