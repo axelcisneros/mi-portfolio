@@ -32,7 +32,7 @@ const Header = () => {
       </div>
       <div className={styles.heroImgWrapper}>
         <img
-          src={profile?.avatar_url || "https://avatars.githubusercontent.com/u/123456?v=4"}
+          src={profile?.avatar_url || "https://avatars.githubusercontent.com/u/99311637?v=4"}
           alt="Foto de perfil"
           className={styles.heroImg}
           loading="lazy"
