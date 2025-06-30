@@ -34,6 +34,22 @@
   gap: 1rem;
   justify-content: center;
   margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .ctaBtns {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .ctaBtn {
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.2rem;
+  }
 }
 .ctaBtn {
   display: inline-block;

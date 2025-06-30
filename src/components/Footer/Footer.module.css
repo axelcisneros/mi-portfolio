@@ -59,4 +59,26 @@
   align-items: center;
   gap: 2.5rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .footerRow {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  .links {
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 0;
+  }
+  .scrollTopBtn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    font-size: 1.05rem;
+    padding: 0.8rem 0;
+    margin-left: 0;
+  }
 }
