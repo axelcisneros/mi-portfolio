@@ -14,13 +14,15 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - **Proyectos destacados**: Cards interactivas que muestran mis proyectos más relevantes, extraídos automáticamente desde mi GitHub, filtrando solo los más actuales y relevantes.
 - **Modal de detalles**: Al hacer clic en un proyecto, se abre un modal con información ampliada y visuales adaptados a cualquier pantalla.
 - **Tecnologías con íconos**: Cada proyecto muestra las tecnologías utilizadas, acompañadas de íconos visuales y nombres normalizados para que cualquier persona pueda identificarlas fácilmente.
-- **Modo claro/oscuro**: Puedes alternar entre ambos modos, y el sitio recordará tu preferencia.
+- **Animaciones y Navegación Fluida**: Transiciones suaves y un scroll elegante gracias a `framer-motion` para una experiencia de usuario más dinámica.
+- **Fondo Personalizado**: Un fondo con un degradado de estilo "azul metálico" que le da un toque único y profesional a la página.
 - **Footer y enlaces sociales**: Acceso directo a mis redes y contacto, con íconos y enlaces personalizados.
 
 ## Características técnicas
 
 - **React + Vite** para una experiencia SPA rápida y moderna.
 - **CSS Modules** y variables CSS para estilos escalables y personalizables.
+- **Framer Motion** para animaciones complejas y de alto rendimiento.
 - **Extracción automática de tecnologías** desde los README de cada proyecto.
 - **Normalización y limpieza de nombres** de tecnologías para evitar redundancias.
 - **Íconos de tecnologías** usando `react-icons`, con colores y fondos adaptados al tema.
@@ -52,6 +54,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - React
 - Vite
 - CSS Modules
+- Framer Motion
 - React Icons
 - Consumo de la API de GitHub
 

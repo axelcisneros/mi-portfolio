@@ -1,32 +1,47 @@
 @import url(../src/styles/Variables.css);
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  height: calc(100vh - 64px);
+  /* Dejamos que el contenedor principal ocupe todo el ancho. */
+  /* El layout se controlará dentro de los componentes. */
+  width: 100%;
+}
+
+html {
+  position: relative;
 }
 
 body {
-  height: 100vh;
   margin: 0;
   font-family: var(--font-family);
-  background-color: var(--color-background);
-  color: var(--color-primary);
+  /* Fondo oscuro principal de respaldo */
+  background-color: #0d122b; /* Un azul medianoche como color base, más profundo */
+  /* Múltiples gradientes para un efecto de metal cepillado y con reflejos */
+  background-image:
+    /* 1. Reflejo superior nítido */
+    linear-gradient(160deg, rgba(117, 168, 255, 0.2) 1%, transparent 30%),
+    /* 2. Reflejo inferior más suave */
+    linear-gradient(340deg, rgba(59, 130, 246, 0.15) 5%, transparent 40%),
+    /* 3. Gradiente base para dar el tono azul metálico */
+    linear-gradient(to right, #1e3a8a, #0d122b, #1e3a8a);
+  background-size: cover;
+  color: var(--color-text-light, #e0e0e0); /* Color de texto claro por defecto */
+  overflow-x: hidden; /* Previene el scroll horizontal */
 }
 
 button {
   font-family: inherit;
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.8em 1.5em;
   font-size: 1rem;
   font-weight: 500;
-  background-color: var(--color-text-light);
+  background: linear-gradient(45deg, var(--color-accent, #3498db), var(--color-secondary, #9b59b6));
+  color: #ffffff;
   cursor: pointer;
-  transition: border-color var(--transition-fast);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 button:hover {
-  border-color: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }

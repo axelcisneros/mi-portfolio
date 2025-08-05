@@ -1,52 +1,35 @@
-import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
-import { fetchGitHubProfile } from "../../utils/githubAPI";
-import { Link, useLocation } from "react-router-dom";
 import cvFile from "../../assets/Axel-Cisneros-Web-Developer.pdf";
 
-// Header con sección Hero: nombre, título, frase y foto
 const Header = () => {
-  const githubUser = "axelcisneros"; // Usa el mismo usuario que en App.jsx
-  const [profile, setProfile] = useState(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    fetchGitHubProfile(githubUser)
-      .then(setProfile)
-      .catch(() => setProfile(null));
-  }, []);
+  const handleSmoothScroll = (e) => {
+    e.preventDefault();
+    const targetId = e.currentTarget.getAttribute("href").substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <header className={styles.header}>
-      <div className={styles.heroContent}>
-        <h1 className={styles.name}>{profile?.name || githubUser}</h1>
-        <h2 className={styles.title}>{profile?.bio || "Desarrollador Frontend"}</h2>
-        <p className={styles.phrase}>
-          &quot;Apasionado por crear experiencias web modernas y accesibles.&quot;
-        </p>
-        <div className={styles.ctaBtns}>
-          <a href={cvFile} className={styles.ctaBtn} target="_blank" rel="noopener noreferrer">CV</a>
-          <Link to="/about" className={`${styles.ctaBtn} ${location.pathname === "/about" ? styles.active : ""}`}>Sobre mí</Link>
-          <Link to="/projects" className={`${styles.ctaBtn} ${location.pathname === "/projects" ? styles.active : ""}`}>Proyectos</Link>
-          <button
-            className={styles.ctaBtn}
-            onClick={() => {
-              const footer = document.querySelector('footer');
-              if (footer) footer.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Contáctame
-          </button>
-        </div>
-      </div>
-      <div className={styles.heroImgWrapper}>
-        <img
-          src={profile?.avatar_url || "https://avatars.githubusercontent.com/u/99311637?v=4"}
-          alt="Foto de perfil"
-          className={styles.heroImg}
-          loading="lazy"
-        />
-      </div>
+      <nav className={styles.nav}>
+        <a href="#about" className={styles.navLink} onClick={handleSmoothScroll}>Sobre Mí</a>
+        <a href="#proyectos" className={styles.navLink} onClick={handleSmoothScroll}>Proyectos</a>
+        <a href={cvFile} className={styles.navLink} target="_blank" rel="noopener noreferrer">CV</a>
+        <a
+          href="#footer"
+          className={styles.navLink}
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          Contacto
+        </a>
+      </nav>
     </header>
   );
 };

@@ -1,35 +1,92 @@
-/* Sección About */
 .aboutSection {
-  background: #fff; /* blanco puro en claro */
-  border-radius: 1.2rem;
-  margin: 2.5rem auto 2rem auto;
-  padding: 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh; /* Ocupa casi toda la pantalla inicial */
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.profilePic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--color-accent, #3498db);
+  box-shadow: 0 0 30px rgba(52, 152, 219, 0.4);
+}
+
+.textContainer {
   max-width: 700px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  color: var(--color-text);
-  transition: background var(--transition), color var(--transition);
 }
-[data-theme='dark'] .aboutSection {
-  background: #18191a; /* fondo oscuro puro en dark */
+
+.name {
+  font-size: 3.5rem;
+  margin: 0;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--color-accent, #3498db), var(--color-secondary, #9b59b6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.aboutSection h2 {
-  margin-top: 0;
-  font-size: 1.7rem;
-  color: var(--color-primary);
+
+.title {
+  font-size: 1.5rem;
+  color: var(--color-text-light, #e0e0e0);
+  margin: 0.5rem 0 1.5rem;
+  font-weight: 400;
 }
-.stackBox, .exploreBox {
-  margin-top: 1.2rem;
-}
-.stackBox h3, .exploreBox h3 {
-  margin-bottom: 0.5rem;
+
+.textContainer p {
   font-size: 1.1rem;
-  color: var(--color-primary);
+  color: var(--color-text-medium, #a0a0a0);
+  line-height: 1.7;
 }
+
+.boxesContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stackBox, .exploreBox {
+  background-color: rgba(30, 30, 30, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  min-width: 220px;
+}
+
+.stackBox h3, .exploreBox h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--color-accent, #3498db);
+}
+
 ul {
   padding-left: 1.2rem;
   margin: 0;
+  text-align: left;
 }
-li {
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    flex-direction: row;
+    text-align: left;
+    gap: 4rem;
+  }
+  .boxesContainer {
+    justify-content: flex-start;
+  }
 }

@@ -1,33 +1,77 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import ProjectCard from "./components/ProjectCard/ProjectCard";
 import ProjectModal from "./components/ProjectModal/ProjectModal";
 import Footer from "./components/Footer/Footer";
-import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
-import { fetchGitHubRepos } from "./utils/githubAPI";
+import { fetchGitHubRepos, findRepoByName } from "./utils/githubAPI";
 import projectData from "./utils/projectData";
 import styles from "./styles/App.module.css";
 
+
 function Projects({ repos, openModal }) {
-  // Ordenar y mapear los repos a los datos enriquecidos de projectData
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Mapea el progreso para que el título aparezca y desaparezca suavemente
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["20px", "0px", "0px", "-20px"]);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 25,
+      },
+    },
+  };
+
   const orderedProjects = projectData
     .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
     .sort((a, b) => b.index - a.index);
 
   return (
-    <section className={styles.projectsSection} id="proyectos">
-      <h2>Proyectos</h2>
-      <div className={styles.projectsGrid}>
+    <section
+      ref={sectionRef}
+      className={styles.projectsSection}
+      id="proyectos"
+    >
+      <motion.h2 style={{ opacity: titleOpacity, y: titleY }}>Proyectos</motion.h2>
+      <motion.div
+        className={styles.projectsGrid}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+      >
         {orderedProjects.map((project) => (
-          <ProjectCard
-            key={project.repo}
-            project={project}
-            onClick={() => openModal(project)}
-          />
+          <motion.div key={project.repo} variants={cardVariants}>
+            <ProjectCard
+              project={project}
+              onClick={() => openModal(project)}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -70,7 +114,12 @@ function App() {
 
   // Abrir modal con el repo seleccionado
   const openModal = (project) => {
-    setSelectedProject(project);
+    const repoData = findRepoByName(repos, project.repo);
+    const projectWithData = {
+      ...project,
+      repoData: repoData,
+    };
+    setSelectedProject(projectWithData);
     setIsModalOpen(true);
   };
 
@@ -86,24 +135,17 @@ function App() {
   }, [isModalOpen]);
 
   return (
-    <Router>
-      <div className={styles.appContainer}>
-        <ThemeToggle />
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Navigate to="/about" replace />} />
-            <Route path="/projects" element={<Projects repos={repos} openModal={openModal} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<Navigate to="/about" replace />} />
-          </Routes>
-        </main>
-        <Footer />
-        {isModalOpen && (
-          <ProjectModal project={selectedProject} onClose={closeModal} />
-        )}
-      </div>
-    </Router>
+    <div className={styles.appContainer}>
+      <Header />
+      <main>
+        <About />
+        <Projects repos={repos} openModal={openModal} />
+      </main>
+      <Footer />
+      <AnimatePresence>
+        {isModalOpen && <ProjectModal project={selectedProject} onClose={closeModal} />}
+      </AnimatePresence>
+    </div>
   );
 }
 

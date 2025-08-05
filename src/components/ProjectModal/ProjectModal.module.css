@@ -1,101 +1,111 @@
-/* Modal de proyecto */
-.overlay {
+.modalBackdrop {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--color-modal-bg); /* fondo translúcido */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 2000;
-  animation: fadeIn 0.3s;
+  padding: 1rem;
+  overflow-y: auto;
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.modal {
-  background: #fff; /* opaco en claro */
-  border-radius: 1.2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-  max-width: 400px;
-  width: 90vw;
+
+.modalContent {
+  background: var(--color-background-light, #2c2c2c);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
-  animation: modalIn 0.3s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 }
-[data-theme='dark'] .modal {
-  background: #18191a; /* opaco en oscuro */
-}
-@keyframes modalIn {
-  from { transform: scale(0.95) translateY(30px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
-}
-.closeBtn {
+
+.closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--color-secondary);
-  color: var(--color-primary);
-  border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
   border: none;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: background var(--transition), color var(--transition);
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+  padding: 0;
+  line-height: 1;
+  /* Sombra para que la 'x' resalte sobre cualquier fondo */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
-.closeBtn:hover {
-  background: var(--color-primary);
+
+.closeButton:hover {
   color: #fff;
+  transform: scale(1.2);
 }
-.image {
+
+.modalImage {
   width: 100%;
-  border-radius: 0.7rem;
+  height: auto;
+  max-height: 300px;
   object-fit: cover;
-  margin-bottom: 0.5rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.title {
-  font-size: 1.3rem;
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem 0.5rem;
+}
+
+.modalTitle {
+  font-size: 2rem;
   font-weight: 700;
-  margin: 0.5rem 0 0.2rem 0;
+  margin: 0;
 }
-.desc {
-  font-size: 1rem;
-  color: var(--color-text);
-  margin: 0 0 0.5rem 0;
-  text-align: center;
-}
+
 .techList {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 2rem 1.5rem;
 }
-.tech {
-  background: var(--color-primary);
-  color: #fff;
-  border-radius: 1rem;
-  padding: 0.2rem 0.8rem;
-  font-size: 0.85rem;
+
+.techTag {
+  background-color: var(--color-accent-transparent, rgba(52, 152, 219, 0.2));
+  color: var(--color-accent, #3498db);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 500;
 }
+
 .links {
   display: flex;
-  gap: 1.2rem;
-  margin-top: 0.7rem;
+  gap: 1rem;
+  align-items: center;
 }
+
 .links a {
-  color: var(--color-primary);
-  font-weight: 600;
-  transition: color var(--transition);
+  color: var(--color-text-medium, #a0a0a0);
+  transition: color 0.2s, transform 0.2s;
 }
+
 .links a:hover {
-  color: #005bb5;
+  color: var(--color-accent, #3498db);
+  transform: scale(1.1);
+}
+
+.modalDescription {
+  padding: 0 2rem 1.5rem;
+  margin: 0;
+  line-height: 1.7;
+  color: var(--color-text-medium, #a0a0a0);
 }

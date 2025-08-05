@@ -26,18 +26,3 @@
   --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-
-/* 🌙 Tema oscuro: se activa con [data-theme='dark'] en <html> o <body> */
-[data-theme='dark'] {
-  --color-text: #ececec; /* Texto blanco para contraste en fondo oscuro */
-  --color-background: #23272f; /* gris oscuro, no negro puro */
-  --color-primary: #e0e0e0; /* Grises claros para títulos en dark mode */
-  --color-secondary: #aaaaaa; /* Texto auxiliar suavizado */
-  --color-accent: #ff6666; /* Rojo vibrante adaptado a fondo oscuro */
-  --color-accent-dark: #990000; /* Hover en modo oscuro */
-  --color-card: #18191a;
-  --color-modal-bg: rgba(30, 32, 36, 0.7);
-  --color-border: #333;
-
-  --shadow-sm: 0 2px 6px rgba(255, 255, 255, 0.08); /* Sombra tenue invertida */
-}

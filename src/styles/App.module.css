@@ -3,8 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
-  transition: background var(--transition);
+  /* El fondo ahora se gestiona globalmente en index.css */
 }
 main {
   flex: 1;
@@ -15,18 +14,22 @@ main {
   box-sizing: border-box;
 }
 .projectsSection {
-  margin: 2.5rem 0 2rem 0;
+  padding: 4rem 0; /* Más espaciado vertical */
 }
 .projectsSection h2 {
-  font-size: 1.6rem;
-  color: var(--color-primary);
-  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 3rem;
 }
 .projectsGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
+
+/* Las animaciones ahora son manejadas por Framer Motion en App.jsx */
+
 @media (min-width: 600px) {
   .projectsGrid {
     grid-template-columns: 1fr 1fr;
