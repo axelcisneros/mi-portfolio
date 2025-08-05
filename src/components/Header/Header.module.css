@@ -29,9 +29,26 @@
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
     transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
 }
 
 .navLink:hover {
     color: var(--color-accent, #3498db);
     transform: translateY(-2px);
+}
+
+.navLink.active {
+    color: var(--color-accent);
+}
+
+.navLink.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
 }

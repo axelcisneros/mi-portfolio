@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import cvFile from "../../assets/Axel-Cisneros-Web-Developer.pdf";
 
-const Header = () => {
+const Header = ({ activeSection }) => {
   const handleSmoothScroll = (e) => {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute("href").substring(1);
@@ -16,12 +16,24 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <a href="#about" className={styles.navLink} onClick={handleSmoothScroll}>Sobre Mí</a>
-        <a href="#proyectos" className={styles.navLink} onClick={handleSmoothScroll}>Proyectos</a>
+        <a
+          href="#about"
+          className={`${styles.navLink} ${activeSection === 'about' ? styles.active : ''}`}
+          onClick={handleSmoothScroll}
+        >
+          Sobre Mí
+        </a>
+        <a
+          href="#proyectos"
+          className={`${styles.navLink} ${activeSection === 'proyectos' ? styles.active : ''}`}
+          onClick={handleSmoothScroll}
+        >
+          Proyectos
+        </a>
         <a href={cvFile} className={styles.navLink} target="_blank" rel="noopener noreferrer">CV</a>
         <a
           href="#footer"
-          className={styles.navLink}
+          className={`${styles.navLink} ${activeSection === 'footer' ? styles.active : ''}`}
           onClick={(e) => {
             e.preventDefault();
             document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });

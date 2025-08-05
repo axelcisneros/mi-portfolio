@@ -15,6 +15,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - **Modal de detalles**: Al hacer clic en un proyecto, se abre un modal con información ampliada y visuales adaptados a cualquier pantalla.
 - **Tecnologías con íconos**: Cada proyecto muestra las tecnologías utilizadas, acompañadas de íconos visuales y nombres normalizados para que cualquier persona pueda identificarlas fácilmente.
 - **Animaciones y Navegación Fluida**: Transiciones suaves y un scroll elegante gracias a `framer-motion` para una experiencia de usuario más dinámica.
+- **Navegación Inteligente**: El enlace del header se resalta automáticamente para indicar en qué sección de la página te encuentras.
 - **Fondo Personalizado**: Un fondo con un degradado de estilo "azul metálico" que le da un toque único y profesional a la página.
 - **Formulario de Contacto**: Un modal interactivo para enviar correos electrónicos directamente desde la página, utilizando EmailJS para el envío seguro.
 - **Footer y enlaces sociales**: Acceso directo a mis redes y contacto, con íconos y enlaces personalizados.
@@ -25,6 +26,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - **CSS Modules** y variables CSS para estilos escalables y personalizables.
 - **Framer Motion** para animaciones complejas y de alto rendimiento.
 - **Extracción automática de tecnologías** desde los README de cada proyecto.
+- **Intersection Observer API** para detectar la sección visible y resaltar el enlace correspondiente.
 - **Normalización y limpieza de nombres** de tecnologías para evitar redundancias.
 - **Íconos de tecnologías** usando `react-icons`, con colores y fondos adaptados al tema.
 - **Accesibilidad**: Navegación por teclado, roles ARIA y contraste adecuado.

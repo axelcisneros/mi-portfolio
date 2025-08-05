@@ -81,6 +81,7 @@ function App() {
   // Estado para el modal y el proyecto seleccionado
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const [isContactModalOpen, setContactModalOpen] = useState(false);
   const [repos, setRepos] = useState([]);
   const githubUser = "axelcisneros"; // Cambia por tu usuario real
@@ -141,9 +142,37 @@ function App() {
     document.body.style.overflow = isAnyModalOpen ? "hidden" : "auto";
   }, [isModalOpen, isContactModalOpen]);
 
+  // Observador para la sección activa
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id], footer[id]');
+
+    const observerOptions = {
+      root: null,
+      // Movemos la "línea de activación" a un 85% de la altura de la pantalla (casi al final).
+      // Esto asegura que incluso secciones cortas como el footer se detecten
+      // correctamente cuando el usuario ha hecho scroll hasta ellas.
+      rootMargin: '-85% 0px -15% 0px',
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, [repos]); // Se re-ejecuta si los repos cambian, para asegurar que #proyectos exista
+
   return (
     <div className={styles.appContainer}>
-      <Header />
+      <Header activeSection={activeSection} />
       <main>
         <About />
         <Projects repos={repos} openModal={openModal} />

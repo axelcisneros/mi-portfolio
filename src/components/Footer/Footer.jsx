@@ -21,7 +21,7 @@ const Footer = ({ openContactModal }) => {
     : `https://linkedin.com/in/${GITHUB_USER}`;
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} id="footer">
       <div className={styles.footerRow}>
         <div className={styles.links}>
           <a href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
