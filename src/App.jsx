@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import ProjectCard from "./components/ProjectCard/ProjectCard";
 import ProjectModal from "./components/ProjectModal/ProjectModal";
+import ContactModal from "./components/ContactModal/ContactModal";
 import Footer from "./components/Footer/Footer";
 import { fetchGitHubRepos, findRepoByName } from "./utils/githubAPI";
 import projectData from "./utils/projectData";
@@ -80,6 +81,7 @@ function App() {
   // Estado para el modal y el proyecto seleccionado
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isContactModalOpen, setContactModalOpen] = useState(false);
   const [repos, setRepos] = useState([]);
   const githubUser = "axelcisneros"; // Cambia por tu usuario real
 
@@ -129,10 +131,15 @@ function App() {
     setSelectedProject(null);
   };
 
+  // Abrir/Cerrar modal de contacto
+  const openContactModal = () => setContactModalOpen(true);
+  const closeContactModal = () => setContactModalOpen(false);
+
   // Bloquear scroll cuando el modal está abierto
   useEffect(() => {
-    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
-  }, [isModalOpen]);
+    const isAnyModalOpen = isModalOpen || isContactModalOpen;
+    document.body.style.overflow = isAnyModalOpen ? "hidden" : "auto";
+  }, [isModalOpen, isContactModalOpen]);
 
   return (
     <div className={styles.appContainer}>
@@ -141,9 +148,10 @@ function App() {
         <About />
         <Projects repos={repos} openModal={openModal} />
       </main>
-      <Footer />
+      <Footer openContactModal={openContactModal} />
       <AnimatePresence>
         {isModalOpen && <ProjectModal project={selectedProject} onClose={closeModal} />}
+        {isContactModalOpen && <ContactModal onClose={closeContactModal} />}
       </AnimatePresence>
     </div>
   );

@@ -7,7 +7,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 const GITHUB_USER = "axelcisneros";
 
 // Footer con links a redes y contacto
-const Footer = () => {
+const Footer = ({ openContactModal }) => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
@@ -19,7 +19,6 @@ const Footer = () => {
   const linkedin = profile?.blog && profile.blog.includes("linkedin.com")
     ? profile.blog
     : `https://linkedin.com/in/${GITHUB_USER}`;
-  const email = profile?.email || "axel.cisneros25@hotmail.com";
 
   return (
     <footer className={styles.footer}>
@@ -33,7 +32,14 @@ const Footer = () => {
             <FaLinkedin style={{ verticalAlign: "middle", marginRight: 6 }} size={22} />
             <span>LinkedIn</span>
           </a>
-          <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer" aria-label="Correo">
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              openContactModal();
+            }}
+            aria-label="Enviar correo"
+          >
             <FaEnvelope style={{ verticalAlign: "middle", marginRight: 6 }} size={22} />
             <span>Correo</span>
           </a>

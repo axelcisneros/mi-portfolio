@@ -16,6 +16,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - **Tecnologías con íconos**: Cada proyecto muestra las tecnologías utilizadas, acompañadas de íconos visuales y nombres normalizados para que cualquier persona pueda identificarlas fácilmente.
 - **Animaciones y Navegación Fluida**: Transiciones suaves y un scroll elegante gracias a `framer-motion` para una experiencia de usuario más dinámica.
 - **Fondo Personalizado**: Un fondo con un degradado de estilo "azul metálico" que le da un toque único y profesional a la página.
+- **Formulario de Contacto**: Un modal interactivo para enviar correos electrónicos directamente desde la página, utilizando EmailJS para el envío seguro.
 - **Footer y enlaces sociales**: Acceso directo a mis redes y contacto, con íconos y enlaces personalizados.
 
 ## Características técnicas
@@ -38,7 +39,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - Se diseñaron cards y modales accesibles y visualmente coherentes.
 - Se integró la API de GitHub para mostrar datos reales de perfil y proyectos.
 - Se agregaron filtros para mostrar solo los proyectos más recientes y relevantes.
-- Se personalizó el footer con enlaces sociales y correo, usando íconos.
+- Se personalizó el footer con enlaces sociales y un modal de contacto, usando íconos.
 - Se ajustaron los estilos para que los fondos de las tecnologías sean claros en modo claro y gris oscuro en modo oscuro.
 - Se realizaron múltiples pruebas y mejoras para asegurar accesibilidad y compatibilidad.
 
@@ -56,6 +57,7 @@ Imagina un espacio digital donde puedes conocerme, explorar mis proyectos y desc
 - CSS Modules
 - Framer Motion
 - React Icons
+- EmailJS
 - Consumo de la API de GitHub
 
 ## ¿Por qué este portfolio es diferente?
