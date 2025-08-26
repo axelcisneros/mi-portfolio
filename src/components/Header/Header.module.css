@@ -2,7 +2,7 @@
     position: sticky;
     top: 0;
     width: 100%;
-    padding: 1rem 0;
+    padding: 0;
     z-index: 1000;
     /* Efecto de "vidrio esmerilado" para un look moderno */
     background-color: rgba(30, 30, 30, 0.7);
@@ -16,10 +16,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0;
 }
 
 .navLink {
@@ -51,4 +50,11 @@
     height: 5px;
     background-color: var(--color-accent);
     border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+    .navLink {
+        font-size: 1rem;
+        padding: 0 0.7rem;
+    }
 }

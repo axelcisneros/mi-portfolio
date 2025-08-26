@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import ProjectCard from "./components/ProjectCard/ProjectCard";
@@ -12,67 +12,32 @@ import styles from "./styles/App.module.css";
 
 
 function Projects({ repos, openModal }) {
-  const sectionRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Mapea el progreso para que el título aparezca y desaparezca suavemente
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const titleY = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], ["20px", "0px", "0px", "-20px"]);
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-      },
-    },
-  };
+  // Animación individual por card
 
   const orderedProjects = projectData
     .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
     .sort((a, b) => b.index - a.index);
 
   return (
-    <section
-      ref={sectionRef}
-      className={styles.projectsSection}
-      id="proyectos"
-    >
-      <motion.h2 style={{ opacity: titleOpacity, y: titleY }}>Proyectos</motion.h2>
-      <motion.div
-        className={styles.projectsGrid}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-      >
+    <section className={styles.projectsSection} id="proyectos">
+      <h2>Proyectos</h2>
+      <div className={styles.projectsGrid}>
         {orderedProjects.map((project) => (
-          <motion.div key={project.repo} variants={cardVariants}>
+          <motion.div
+            key={project.repo}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
             <ProjectCard
               project={project}
               onClick={() => openModal(project)}
             />
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 }
