@@ -5,7 +5,10 @@ const projects = [
     repo: "King-s-Nail-s",
     img: "./assets/images/King-s-Nail-s.png",
     tech: [
-      "HTML5", "CSS3", "BEM", "Git Bash", "GitHub", "GitHub Pages", "Branch", "JavaScript", "React", "Vite"
+      // Frontend
+      "HTML5", "CSS3", "Figma", "Git Bash", "GitHub", "GitHub Pages", "Branch", "JavaScript", "API's", "React", "Vite", "Axios", "Vercel", "SEO", "Responsivo", "UI/UX",
+      // Backend
+      "Node.js", "MongoDB Compass", "Google Cloud", "GCP", "Postman", "Express", "Mongoose", "JWT", "Winston", "Bcryptjs", "Celebrate", "Cors", "Dotenv", "Joi", "Validator", "Multer", "Cloudinary", "Helmet", "Rate Limit", "Express-Validator", "Cookie-Parser"
     ],
     web: "https://king-s-nail-s.vercel.app/",
     repoUrl: "https://github.com/axelcisneros/King-s-Nail-s",
