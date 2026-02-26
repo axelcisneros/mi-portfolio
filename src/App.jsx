@@ -1,35 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
+import Experience from "./components/Experience/Experience";
 import ProjectCard from "./components/ProjectCard/ProjectCard";
-import ProjectModal from "./components/ProjectModal/ProjectModal";
-import ContactModal from "./components/ContactModal/ContactModal";
 import Footer from "./components/Footer/Footer";
 import { fetchGitHubRepos, findRepoByName } from "./utils/githubAPI";
 import projectData from "./utils/projectData";
 import styles from "./styles/App.module.css";
 
+// Lazy loading para los modales (Optimización de Bundle)
+const ProjectModal = lazy(() => import("./components/ProjectModal/ProjectModal"));
+const ContactModal = lazy(() => import("./components/ContactModal/ContactModal"));
 
 function Projects({ repos, openModal }) {
-  // Animación individual por card
-
-  const orderedProjects = projectData
-    .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
-    .sort((a, b) => b.index - a.index);
+  // useMemo para evitar recalcular el filtrado y ordenamiento en cada render
+  const orderedProjects = useMemo(() => {
+    return projectData
+      .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
+      .sort((a, b) => b.index - a.index);
+  }, [repos]);
 
   return (
     <section className={styles.projectsSection} id="proyectos">
-      <h2>Proyectos</h2>
+      <h2>Proyectos Destacados</h2>
       <div className={styles.projectsGrid}>
-        {orderedProjects.map((project) => (
+        {orderedProjects.map((project, index) => (
           <motion.div
             key={project.repo}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            viewport={{ once: false, amount: 0.3 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 25,
+              delay: index * 0.1 // Animación escalonada
+            }}
+            viewport={{ once: true, amount: 0.2 }} // once: true mejora el rendimiento
           >
             <ProjectCard
               project={project}
@@ -49,15 +57,18 @@ function App() {
   const [activeSection, setActiveSection] = useState('');
   const [isContactModalOpen, setContactModalOpen] = useState(false);
   const [repos, setRepos] = useState([]);
-  const githubUser = "axelcisneros"; // Cambia por tu usuario real
+  const githubUser = "axelcisneros";
 
   // Cargar los repositorios de GitHub al montar
   useEffect(() => {
+    let isMounted = true; // Prevenir actualizaciones de estado si el componente se desmonta
+
     fetchGitHubRepos(githubUser)
-      .then(repos => {
-        const filtered = repos.filter(repo => {
+      .then(reposData => {
+        if (!isMounted) return;
+        
+        const filtered = reposData.filter(repo => {
           const year = new Date(repo.created_at).getFullYear();
-          // Excluye el repo de presentación y los repos específicos
           const excluded = [
             githubUser.toLowerCase(),
             "acordeon-sc900",
@@ -70,14 +81,18 @@ function App() {
             "web_project_around-11",
             "mi-portfolio"
           ];
-          return (
-            year >= 2024 &&
-            !excluded.includes(repo.name.toLowerCase())
-          );
+          return year >= 2024 && !excluded.includes(repo.name.toLowerCase());
         });
         setRepos(filtered);
       })
-      .catch(() => setRepos([]));
+      .catch(error => {
+        console.error("Error fetching repos:", error);
+        if (isMounted) setRepos([]);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Abrir modal con el repo seleccionado
@@ -113,9 +128,6 @@ function App() {
 
     const observerOptions = {
       root: null,
-      // Movemos la "línea de activación" a un 85% de la altura de la pantalla (casi al final).
-      // Esto asegura que incluso secciones cortas como el footer se detecten
-      // correctamente cuando el usuario ha hecho scroll hasta ellas.
       rootMargin: '-85% 0px -15% 0px',
       threshold: 0,
     };
@@ -133,20 +145,24 @@ function App() {
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
-  }, [repos]); // Se re-ejecuta si los repos cambian, para asegurar que #proyectos exista
+  }, [repos]);
 
   return (
     <div className={styles.appContainer}>
       <Header activeSection={activeSection} />
       <main>
         <About />
+        <Experience />
         <Projects repos={repos} openModal={openModal} />
       </main>
       <Footer openContactModal={openContactModal} />
-      <AnimatePresence>
-        {isModalOpen && <ProjectModal project={selectedProject} onClose={closeModal} />}
-        {isContactModalOpen && <ContactModal onClose={closeContactModal} />}
-      </AnimatePresence>
+      
+      <Suspense fallback={null}>
+        <AnimatePresence>
+          {isModalOpen && <ProjectModal project={selectedProject} onClose={closeModal} />}
+          {isContactModalOpen && <ContactModal onClose={closeContactModal} />}
+        </AnimatePresence>
+      </Suspense>
     </div>
   );
 }

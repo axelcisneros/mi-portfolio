@@ -1,47 +1,49 @@
 @import url(../src/styles/Variables.css);
 
 #root {
-  /* Dejamos que el contenedor principal ocupe todo el ancho. */
-  /* El layout se controlará dentro de los componentes. */
   width: 100%;
 }
 
 html {
   position: relative;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-family);
-  /* Fondo oscuro principal de respaldo */
-  background-color: #0d122b; /* Un azul medianoche como color base, más profundo */
-  /* Múltiples gradientes para un efecto de metal cepillado y con reflejos */
-  background-image:
-    /* 1. Reflejo superior nítido */
-    linear-gradient(160deg, rgba(117, 168, 255, 0.2) 1%, transparent 30%),
-    /* 2. Reflejo inferior más suave */
-    linear-gradient(340deg, rgba(59, 130, 246, 0.15) 5%, transparent 40%),
-    /* 3. Gradiente base para dar el tono azul metálico */
-    linear-gradient(to right, #1e3a8a, #0d122b, #1e3a8a);
-  background-size: cover;
-  color: var(--color-text-light, #e0e0e0); /* Color de texto claro por defecto */
-  overflow-x: hidden; /* Previene el scroll horizontal */
+  font-family: var(--font-body);
+  background-color: var(--color-bg-base);
+  /* Gradiente radial sutil para dar profundidad */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(255, 51, 102, 0.04), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.04), transparent 25%);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 button {
-  font-family: inherit;
+  font-family: var(--font-heading);
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-accent);
   padding: 0.8em 1.5em;
   font-size: 1rem;
-  font-weight: 500;
-  background: linear-gradient(45deg, var(--color-accent, #3498db), var(--color-secondary, #9b59b6));
+  font-weight: 600;
+  background: var(--color-accent);
   color: #ffffff;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: var(--transition);
 }
 
 button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }

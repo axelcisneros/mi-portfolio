@@ -2,73 +2,84 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(11, 12, 16, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
   padding: 1rem;
-  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .modalContent {
-  background: var(--color-background-light, #2c2c2c);
-  border-radius: 16px;
+  background: var(--color-bg-surface);
+  border-radius: 24px;
   width: 100%;
   max-width: 700px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-glow);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 .closeButton {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.8);
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-secondary);
   cursor: pointer;
-  transition: color 0.2s, transform 0.2s;
+  transition: var(--transition);
   z-index: 10;
   padding: 0;
-  line-height: 1;
-  /* Sombra para que la 'x' resalte sobre cualquier fondo */
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
 
 .closeButton:hover {
-  color: #fff;
-  transform: scale(1.2);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+  background: rgba(255, 51, 102, 0.1);
 }
 
 .modalImage {
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 350px;
   object-fit: cover;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem 0.5rem;
+  padding: 2rem 2rem 1rem;
 }
 
 .modalTitle {
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-heading);
 }
 
 .techList {
@@ -79,11 +90,12 @@
 }
 
 .techTag {
-  background-color: var(--color-accent-transparent, rgba(52, 152, 219, 0.2));
-  color: var(--color-accent, #3498db);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
@@ -94,18 +106,85 @@
 }
 
 .links a {
-  color: var(--color-text-medium, #a0a0a0);
-  transition: color 0.2s, transform 0.2s;
+  color: var(--color-text-secondary);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
 }
 
 .links a:hover {
-  color: var(--color-accent, #3498db);
-  transform: scale(1.1);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 51, 102, 0.2);
 }
 
 .modalDescription {
-  padding: 0 2rem 1.5rem;
+  padding: 0 2rem 2rem;
   margin: 0;
   line-height: 1.7;
-  color: var(--color-text-medium, #a0a0a0);
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    border-radius: 20px;
+  }
+  .modalImage {
+    max-height: 250px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .modalHeader {
+    padding: 1.5rem 1.5rem 0.75rem;
+  }
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+  .techList {
+    padding: 0 1.5rem 1rem;
+  }
+  .modalDescription {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  .closeButton {
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalBackdrop {
+    padding: 0.5rem;
+  }
+  .modalContent {
+    border-radius: 16px;
+  }
+  .modalImage {
+    max-height: 200px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .modalHeader {
+    padding: 1.25rem 1.25rem 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .techList {
+    padding: 0 1.25rem 1rem;
+  }
+  .modalDescription {
+    padding: 0 1.25rem 1.25rem;
+  }
 }

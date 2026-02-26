@@ -2,7 +2,7 @@
 import styles from "./Footer.module.css";
 import { fetchGitHubProfile } from "../../utils/githubAPI";
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
 
 const GITHUB_USER = "axelcisneros";
 
@@ -24,12 +24,12 @@ const Footer = ({ openContactModal }) => {
     <footer className={styles.footer} id="footer">
       <div className={styles.footerRow}>
         <div className={styles.links}>
-          <a href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <FaGithub style={{ verticalAlign: "middle", marginRight: 6 }} size={22} />
+          <a href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noopener noreferrer" aria-label="Visitar mi perfil de GitHub">
+            <FaGithub size={20} />
             <span>GitHub</span>
           </a>
-          <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedin style={{ verticalAlign: "middle", marginRight: 6 }} size={22} />
+          <a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="Visitar mi perfil de LinkedIn">
+            <FaLinkedin size={20} />
             <span>LinkedIn</span>
           </a>
           <a
@@ -38,9 +38,9 @@ const Footer = ({ openContactModal }) => {
               e.preventDefault();
               openContactModal();
             }}
-            aria-label="Enviar correo"
+            aria-label="Abrir formulario de contacto"
           >
-            <FaEnvelope style={{ verticalAlign: "middle", marginRight: 6 }} size={22} />
+            <FaEnvelope size={20} />
             <span>Correo</span>
           </a>
         </div>
@@ -49,13 +49,14 @@ const Footer = ({ openContactModal }) => {
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          aria-label="Volver arriba"
+          aria-label="Volver al inicio de la página"
         >
-          Volver arriba
+          <span>Volver arriba</span>
+          <FaArrowUp size={14} />
         </button>
       </div>
       <div className={styles.copy}>
-        © {new Date().getFullYear()} {profile?.name || "Tu Nombre"}. Hecho con React + Vite.
+        © {new Date().getFullYear()} {profile?.name || "Axel Cisneros"}. Construido con React + Vite.
       </div>
     </footer>
   );

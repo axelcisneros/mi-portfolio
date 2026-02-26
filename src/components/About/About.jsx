@@ -8,59 +8,97 @@ const About = () => {
   const [profile, setProfile] = useState(null);
   const sectionRef = useRef(null);
 
-  // 1. useScroll rastrea el progreso de scroll de la sección
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    // La animación empieza cuando la parte de arriba de la sección llega al
-    // tope de la pantalla, y termina cuando la parte de abajo llega al tope.
-    offset: ["start start", "end start"],
+    offset: ["start end", "end start"], // Cambiado para que la animación dure más tiempo en pantalla
   });
 
-  // 2. Mapea el progreso del scroll (de 0 a 1) a estilos CSS.
-  // A medida que la sección se va, su opacidad va de 1 a 0.
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  // También se mueve un poco hacia arriba para un efecto más suave.
-  const y = useTransform(scrollYProgress, [0, 0.5], ["0%", "-10%"]);
+  // Ajustado el rango para que no desaparezca tan rápido
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["10%", "0%", "0%", "-10%"]);
 
   useEffect(() => {
     fetchGitHubProfile(githubUser)
       .then(setProfile)
-      .catch(() => setProfile(null)); // Manejo de error básico
+      .catch(() => setProfile(null));
   }, []);
 
   return (
     <section ref={sectionRef} className={styles.aboutSection} id="about">
       <motion.div className={styles.contentWrapper} style={{ opacity, y }}>
-        <img
-          src={profile?.avatar_url || "https://avatars.githubusercontent.com/u/99311637?v=4"}
-          alt="Foto de perfil de Axel Cisneros"
-          className={styles.profilePic}
-        />
-        <div className={styles.textContainer}>
+        
+        {/* Tarjeta de Perfil (Izquierda) */}
+        <motion.div 
+          className={styles.profileCard}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <img
+            src={profile?.avatar_url || "https://avatars.githubusercontent.com/u/99311637?v=4"}
+            alt="Foto de perfil de Axel Cisneros"
+            className={styles.profilePic}
+          />
           <h1 className={styles.name}>{profile?.name || "Axel Cisneros"}</h1>
-          <h2 className={styles.title}>{profile?.bio || "Desarrollador Frontend"}</h2>
-          <p>
-            Soy un desarrollador web apasionado por crear experiencias digitales modernas, accesibles y de alto rendimiento. Mi formación en React, Node.js y Express me ha permitido especializarme tanto en frontend como en backend.
-          </p>
-          <div className={styles.boxesContainer}>
-            <div className={styles.stackBox}>
-              <h3>Stack favorito:</h3>
-              <ul>
-                <li>React</li>
-                <li>Vite</li>
-                <li>CSS Modules</li>
-                <li>JavaScript (ES6+)</li>
+          <h2 className={styles.title}>Fullstack Engineer</h2>
+        </motion.div>
+
+        {/* Contenedor Derecho (Grid interno) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          
+          {/* Info Principal */}
+          <motion.div 
+            className={styles.mainInfoCard}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <span className={styles.greeting}>Hola, soy Axel 👋</span>
+            <h3 className={styles.headline}>
+              Construyo experiencias digitales que <span>funcionan</span> y <span>destacan</span>.
+            </h3>
+            <p className={styles.description}>
+              Desarrollador web apasionado por crear interfaces modernas, accesibles y de alto rendimiento. 
+              Mi formación en el stack MERN (React, Node.js, Express, MongoDB) me permite construir 
+              soluciones completas, desde el diseño UI hasta la arquitectura de la API.
+            </p>
+          </motion.div>
+
+          {/* Skills Grid */}
+          <div className={styles.skillsContainer}>
+            <motion.div 
+              className={styles.skillBox}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            >
+              <h3>Stack Principal</h3>
+              <ul className={styles.skillList}>
+                <li className={styles.skillTag}>React 19</li>
+                <li className={styles.skillTag}>Node.js</li>
+                <li className={styles.skillTag}>Express</li>
+                <li className={styles.skillTag}>MongoDB</li>
+                <li className={styles.skillTag}>JavaScript (ES6+)</li>
               </ul>
-            </div>
-            <div className={styles.exploreBox}>
-              <h3>Explorando ahora:</h3>
-              <ul>
-                <li>TypeScript</li>
-                <li>Testing Library</li>
-                <li>Framer Motion</li>
+            </motion.div>
+
+            <motion.div 
+              className={styles.skillBox}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            >
+              <h3>Herramientas & UI</h3>
+              <ul className={styles.skillList}>
+                <li className={styles.skillTag}>Vite</li>
+                <li className={styles.skillTag}>Framer Motion</li>
+                <li className={styles.skillTag}>CSS Modules</li>
+                <li className={styles.skillTag}>Git / GitHub</li>
+                <li className={styles.skillTag}>Figma</li>
               </ul>
-            </div>
+            </motion.div>
           </div>
+
         </div>
       </motion.div>
     </section>

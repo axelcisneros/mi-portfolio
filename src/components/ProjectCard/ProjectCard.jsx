@@ -59,12 +59,14 @@ function getProjectImage(imgPath) {
 const ProjectCard = ({ project, onClick }) => (
   <div className={styles.card} onClick={onClick} tabIndex={0} role="button" aria-label={`Ver detalles de ${project.repo}`}
     onKeyDown={e => (e.key === "Enter" ? onClick() : null)}>
-    <img src={getProjectImage(project.img)} alt={project.repo} className={styles.image} loading="lazy" />
+    <div className={styles.imageContainer}>
+      <img src={getProjectImage(project.img)} alt={`Captura de pantalla de ${project.repo}`} className={styles.image} loading="lazy" />
+    </div>
     <div className={styles.info}>
       <h3 className={styles.title}>{project.repo}</h3>
       {/* <p className={styles.desc}>{project.desc}</p> */}
       <div className={styles.techList}>
-        {project.tech.map((t) => {
+        {project.tech.slice(0, 4).map((t) => {
           const norm = normalizeTechName(t);
           return (
             <span key={norm} className={styles.tech} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3em' }}>
@@ -73,6 +75,9 @@ const ProjectCard = ({ project, onClick }) => (
             </span>
           );
         })}
+        {project.tech.length > 4 && (
+          <span className={styles.tech}>+{project.tech.length - 4}</span>
+        )}
       </div>
     </div>
   </div>

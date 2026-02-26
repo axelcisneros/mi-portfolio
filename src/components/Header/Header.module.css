@@ -2,59 +2,55 @@
     position: sticky;
     top: 0;
     width: 100%;
-    padding: 0;
+    padding: 1rem 0;
     z-index: 1000;
-    /* Efecto de "vidrio esmerilado" para un look moderno */
-    background-color: rgba(30, 30, 30, 0.7);
-    -webkit-backdrop-filter: blur(10px); /* Para compatibilidad con Safari */
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    transition: top 0.3s;
+    background-color: rgba(11, 12, 16, 0.7);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--color-border);
+    transition: var(--transition);
 }
 
 .nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 1100px;
+    gap: 1rem;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 2rem;
 }
 
 .navLink {
-    color: var(--color-text-light, #e0e0e0);
+    color: var(--color-text-secondary);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1rem;
     padding: 0.5rem 1rem;
-    transition: color 0.3s ease, transform 0.2s ease;
+    border-radius: 100px;
+    transition: var(--transition-fast);
     position: relative;
+    font-family: var(--font-body);
 }
 
 .navLink:hover {
-    color: var(--color-accent, #3498db);
-    transform: translateY(-2px);
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface-hover);
 }
 
 .navLink.active {
     color: var(--color-accent);
-}
-
-.navLink.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 5px;
-    height: 5px;
-    background-color: var(--color-accent);
-    border-radius: 50%;
+    background: rgba(255, 51, 102, 0.1);
 }
 
 @media (max-width: 600px) {
+    .nav {
+        gap: 0.25rem;
+        padding: 0 0.5rem; /* Reducido para 375px */
+        flex-wrap: wrap; /* Permite que los enlaces bajen si no caben */
+    }
     .navLink {
-        font-size: 1rem;
-        padding: 0 0.7rem;
+        font-size: 0.85rem; /* Ligeramente más pequeño */
+        padding: 0.4rem 0.6rem;
     }
 }

@@ -1,5 +1,4 @@
 import styles from "./Header.module.css";
-import cvFile from "../../assets/Axel-Cisneros-Web-Developer.pdf";
 
 const Header = ({ activeSection }) => {
   const handleSmoothScroll = (e) => {
@@ -24,13 +23,19 @@ const Header = ({ activeSection }) => {
           Sobre Mí
         </a>
         <a
+          href="#experiencia"
+          className={`${styles.navLink} ${activeSection === 'experiencia' ? styles.active : ''}`}
+          onClick={handleSmoothScroll}
+        >
+          Experiencia
+        </a>
+        <a
           href="#proyectos"
           className={`${styles.navLink} ${activeSection === 'proyectos' ? styles.active : ''}`}
           onClick={handleSmoothScroll}
         >
           Proyectos
         </a>
-        <a href={cvFile} className={styles.navLink} target="_blank" rel="noopener noreferrer">CV</a>
         <a
           href="#footer"
           className={`${styles.navLink} ${activeSection === 'footer' ? styles.active : ''}`}
