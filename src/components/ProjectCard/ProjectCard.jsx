@@ -33,6 +33,7 @@ function normalizeTechName(name) {
     "Node.js": "Node.js",
     "CSS": "CSS3",
     "CSS3": "CSS3",
+    "SCSS": "SCSS",
     "HTML5 semántico": "HTML5",
     "HTML5": "HTML5",
     "JavaScript (ES6+)": "JavaScript",
@@ -42,6 +43,7 @@ function normalizeTechName(name) {
     "GIT BASH": "Git Bash",
     "GITHUB PAGES": "GitHub Pages",
     "MongoDBCompass": "MongoDB Compass",
+    "Next.js": "Next.js",
     // Puedes agregar más equivalencias aquí
   };
   return map[name] || name;
@@ -50,6 +52,7 @@ function normalizeTechName(name) {
 // Utilidad para resolver la imagen usando import.meta.glob
 const images = import.meta.glob('../../assets/images/*', { eager: true });
 function getProjectImage(imgPath) {
+  if (!imgPath) return ''; // Prevenir error si un proyecto no tiene imagen definida
   const fileName = imgPath.split('/').pop();
   const match = Object.entries(images).find(([key]) => key.endsWith(fileName));
   return match ? match[1].default : '';

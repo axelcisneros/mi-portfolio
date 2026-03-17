@@ -17,7 +17,7 @@ function Projects({ repos, openModal }) {
   // useMemo para evitar recalcular el filtrado y ordenamiento en cada render
   const orderedProjects = useMemo(() => {
     return projectData
-      .filter(p => repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
+      .filter(p => p.isPrivate || repos.some(r => r.name.toLowerCase() === p.repo.toLowerCase()))
       .sort((a, b) => b.index - a.index);
   }, [repos]);
 

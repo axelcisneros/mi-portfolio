@@ -1,6 +1,18 @@
 // Lista de proyectos con tecnologías extraídas de los README locales
 const projects = [
   {
+    index: 14,
+    repo: "Elo Forge",
+    isPrivate: true,
+    img: "./assets/images/elo-forge.png",
+    tech: [
+      // Frontend
+      "HTML5", "CSS3","SCSS", "Git Bash", "GitHub", "GitHub Pages", "Branch", "JavaScript", "API's", "React", "Next.js", "Vercel", "SEO", "Responsivo", "UI/UX",
+    ],
+    web: "https://eloforge.gg/",
+    desc: "Sitio web moderno y responsivo para jugadores de Teamfight Tactics, diseñado para ofrecer una experiencia visual atractiva y fácil de usar. Desarrollado con React y Next.js, integra un backend robusto para gestionar datos de partidas, estadísticas, composiciones y perfiles de jugadores."
+  },
+  {
     index: 13,
     repo: "King-s-Nail-s",
     img: "./assets/images/King-s-Nail-s.png",
