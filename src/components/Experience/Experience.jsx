@@ -7,10 +7,10 @@ const experienceData = [
   {
     id: 1,
     type: "work",
-    title: "Instructor",
+    title: "Tutor",
     company: "Triple Ten",
     date: "Noviembre 2025 - Presente",
-    description: "Revisión de código con detección de errores. Apoyo a estudiantes para entender instrucciones y uso de BRIEFS. Resolución de dudas sobre lecciones y código.",
+    description: "Responder a las preguntas escritas de los alumnos en los canales de la plataforma, una vez por sprint, durante los horarios establecidos para todos los grupos. Ayudar a los alumnos en el espacio de coaprendizaje, que es un canal de voz por especialidad disponible para los alumnos de todos los grupos de la misma región, donde pueden debatir juntos, compartir pantalla y resolver dudas de forma oral. Moderar el espacio de coaprendizaje (canal de voz) con los alumnos de todas las promociones",
   },
   {
     id: 2,
